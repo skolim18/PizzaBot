@@ -6,6 +6,9 @@ from utils import CHROMEDRIVER_PATH, chrome_options
 class Pizza:
     """Klasa główna aplikacji, wykonuje wszystkie najważniejsze operacje w programie"""
 
+    # pylint: disable=too-many-instance-attributes
+    # 10 atrybutów jest wytłumaczalne dla tego typu klasy.
+
     def __init__(self, hunger=None, drink=4):
         self.hunger = hunger
         self.drink = drink
@@ -21,7 +24,6 @@ class Pizza:
         self.small_pizza = '//*[@id="cb09d6a1-c93f-11e7-93f9-525400841de1"]/div[2]'
         self.large_pizza = '//*[@id="ce6b7613-c93f-11e7-93f9-525400841de1"]/div[2]'
 
-    @property
     def hunger_drink(self):
         """Metoda weryfikuje czy użytkownik wprowadził poprawne numery oraz wysyła komunikat o zamówieniu"""
         if isinstance(self.hunger, int):
@@ -71,11 +73,11 @@ class Pizza:
         picker.click()
 
     def pick_drink(self, xpath):
-        """Metoda która po podaniu parametru zwróci nam xpath do przycisku"""
+        """Metoda która po podaniu parametru zwróci nam xpath do przycisku dodawania napoju"""
         picker = self.driver.find_element_by_xpath(xpath)
         picker.location_once_scrolled_into_view
-        time.sleep(1)
         picker.click()
+        time.sleep(1)
 
     def next_button(self, button_xpath):
         """Metoda dzięki której bot klika w guziki"""
